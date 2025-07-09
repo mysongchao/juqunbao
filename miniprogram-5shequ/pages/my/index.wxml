@@ -1,0 +1,93 @@
+<!-- 全局消息提示组件 -->
+<t-toast id="t-toast" />
+
+<!-- 个人中心主容器 -->
+<view class="my">
+  <!-- 顶部背景与导航栏 -->
+  <image class="nav-bg" src="/static/bg_navbar.png" />
+  <nav title-text="我的" />
+  <!-- 用户信息区 -->
+  <view class="my-info">
+    <t-cell-group>
+      <!-- 已登录用户信息展示 -->
+      <t-cell wx:if="{{isLoad}}" bordered="{{false}}">
+        <t-avatar image="{{personalInfo.image}}" slot="left-icon" size="large" />
+        <view class="my-info__person" slot="description">
+          <view class="name">{{personalInfo.name}}</view>
+          <view class="tags">
+            <t-tag class="tag" variant="light" icon="discount">{{personalInfo.star}}</t-tag>
+            <!-- 城市信息已隐藏，保留注释 -->
+            <!-- <t-tag class="tag" variant="light" icon="location">{{personalInfo.city}}</t-tag> -->
+          </view>
+          <!-- 同步微信信息按钮 -->
+          <t-button class="sync-btn" theme="primary" size="small" bindtap="onSyncUserInfo">同步微信信息</t-button>
+        </view>
+        <view slot="right-icon" class="user-actions">
+          <t-icon name="edit" size="40rpx" color="#000000e6" bindtap="onNavigateTo" />
+          <t-icon name="refresh" size="40rpx" color="#666" bindtap="onSyncUserInfo" style="margin-left: 20rpx;" />
+        </view>
+      </t-cell>
+      <!-- 未登录提示与登录按钮 -->
+      <t-cell
+        wx:if="{{!isLoad}}"
+        title="请先登录/注册"
+        bordered="{{false}}"
+        t-class-title="cell-class-title"
+        t-class-center="cell-class-center"
+        bindtap="onLogin"
+      >
+        <t-avatar slot="left-icon" icon="user" size="128rpx" />
+      </t-cell>
+    </t-cell-group>
+    <!-- 分割线 -->
+    <t-divider t-class="divider-class" />
+    <!-- 内容统计与入口区 -->
+    <t-grid t-class="grid-class">
+      <t-grid-item
+        wx:for="{{gridList}}"
+        wx:for-item="gridItem"
+        wx:key="type"
+        text="{{gridItem.name}}"
+        icon="{{gridItem.icon}}"
+        class="grid-item {{gridItem.type === 'all' ? 'split-line' : ''}}"
+        data-data="{{gridItem}}"
+        bindclick="onEleClick"
+      />
+    </t-grid>
+  </view>
+
+  <!-- 推荐服务区 -->
+  <view class="my-service">
+    <view class="my-service--tips">推荐服务</view>
+    <t-grid column="{{4}}" class="my-service__list">
+      <t-grid-item
+        class="my-service__list-item"
+        wx:for="{{service}}"
+        wx:key="item"
+        text="{{item.name}}"
+        image="{{item.image}}"
+        url="{{item.url}}"
+        data-data="{{item}}"
+        bindclick="onEleClick"
+      />
+    </t-grid>
+  </view>
+
+  <!-- 设置与客服入口区 -->
+  <t-cell-group theme="card">
+    <t-cell
+      wx:for="{{settingList}}"
+      wx:for-item="item"
+      wx:key="type"
+      title="{{item.name}}"
+      url="{{item.url}}"
+      leftIcon="{{item.icon}}"
+      hover
+      arrow
+      data-data="{{item}}"
+      bindclick="onEleClick"
+    />
+  </t-cell-group>
+  <!-- 退出登录按钮 -->
+  <t-button class="logout-btn" theme="danger" size="large" bindtap="onLogout">退出登录</t-button>
+</view>

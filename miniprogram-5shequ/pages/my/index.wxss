@@ -1,0 +1,174 @@
+/* pages/my/index.wxss */
+.my {
+  background-color: #f5f5f5;
+  min-height: 100vh;
+}
+
+.nav-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 400rpx;
+  z-index: -1;
+}
+
+.my-info {
+  background-color: #fff;
+  margin: 20rpx;
+  border-radius: 16rpx;
+  overflow: hidden;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.1);
+}
+
+.my-info__person {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.name {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10rpx;
+}
+
+.tags {
+  display: flex;
+  gap: 10rpx;
+}
+
+.tag {
+  font-size: 24rpx;
+}
+
+.user-actions {
+  display: flex;
+  align-items: center;
+}
+
+.login-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20rpx 0;
+}
+
+.login-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10rpx;
+}
+
+.login-desc {
+  font-size: 28rpx;
+  color: #666;
+  margin-bottom: 20rpx;
+}
+
+.user-stats {
+  padding: 20rpx;
+  background-color: #f8f9fa;
+}
+
+.stats-grid {
+  background-color: transparent;
+}
+
+.stats-grid .t-grid-item {
+  text-align: center;
+}
+
+.stats-grid .t-grid-item__text {
+  font-size: 28rpx;
+  color: #333;
+  font-weight: bold;
+}
+
+.stats-grid .t-grid-item__description {
+  font-size: 24rpx;
+  color: #666;
+  margin-top: 5rpx;
+}
+
+.divider-class {
+  margin: 0;
+}
+
+.grid-class {
+  background-color: transparent;
+}
+
+.grid-item {
+  padding: 30rpx 20rpx;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.grid-item:last-child {
+  border-bottom: none;
+}
+
+.grid-item.split-line {
+  border-right: 1rpx solid #f0f0f0;
+}
+
+.my-service {
+  background-color: #fff;
+  margin: 20rpx;
+  border-radius: 16rpx;
+  padding: 30rpx;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.1);
+}
+
+.my-service--tips {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 30rpx;
+}
+
+.my-service__list {
+  background-color: transparent;
+}
+
+.my-service__list-item {
+  text-align: center;
+}
+
+.my-service__list-item .t-grid-item__image {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 16rpx;
+  margin-bottom: 10rpx;
+}
+
+.my-service__list-item .t-grid-item__text {
+  font-size: 24rpx;
+  color: #666;
+}
+
+.logout-text {
+  color: #ff4d4f !important;
+}
+
+/* 响应式设计 */
+@media (max-width: 750rpx) {
+  .my-info {
+    margin: 10rpx;
+  }
+  
+  .my-service {
+    margin: 10rpx;
+    padding: 20rpx;
+  }
+  
+  .name {
+    font-size: 32rpx;
+  }
+  
+  .login-title {
+    font-size: 28rpx;
+  }
+} 

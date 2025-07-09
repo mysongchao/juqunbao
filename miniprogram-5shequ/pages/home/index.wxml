@@ -1,0 +1,95 @@
+<!-- 首页顶部搜索栏 -->
+<nav nav-type="search" />
+<!-- 首页主容器 -->
+<view class="home-container">
+  <!-- 首页内容区 -->
+  <view class="home-content">
+    <!-- 顶部标签页（推荐/我的关注） -->
+    <t-tabs defaultValue="recommend">
+      <!-- 推荐内容流面板 -->
+      <t-tab-panel label="推荐" value="recommend">
+        <!-- 下拉刷新组件 -->
+        <t-pull-down-refresh
+          value="{{enable}}"
+          bind:refresh="onRefresh"
+          loadingTexts="{{['下拉刷新', '松手刷新', '正在刷新', '刷新完成']}}"
+        >
+          <!-- 内容卡片列表 -->
+          <view class="home-card-list">
+            <!-- 轮播图组件（已隐藏） -->
+            <!-- <t-swiper
+              list="{{swiperList}}"
+              navigation="{{ { type: 'dots-bar' } }}"
+              height="488rpx"
+              style="width: 340rpx"
+              bind:click="onSwiperClick"
+            /> -->
+            <!-- 内容卡片组件，循环渲染，desc 只显示部分内容 -->
+            <card
+              wx:for="{{cardInfo}}"
+              wx:key="_id"
+              url="{{item.url}}"
+              desc="{{item.desc}}"
+              tags="{{item.tags}}"
+              bindtap="goDetail"
+              data-id="{{item._id}}"
+            >
+              <view slot="desc" class="card-desc-ellipsis">{{item.desc.length > 20 ? item.desc.slice(0, 20) + '...' : item.desc}}</view>
+            </card>
+          </view>
+        </t-pull-down-refresh>
+      </t-tab-panel>
+      <!-- 我的关注内容流面板 -->
+      <t-tab-panel label="我的关注" value="follow">
+        <view class="home-card-list">
+          <!-- 关注内容卡片组件，循环渲染 -->
+          <card
+            wx:for="{{focusCardInfo}}"
+            wx:key="_id"
+            url="{{item.url}}"
+            desc="{{item.desc}}"
+            tags="{{item.tags}}"
+            bindtap="goDetail"
+            data-id="{{item._id}}"
+          >
+            <view slot="desc" class="card-desc-ellipsis">{{item.desc.length > 20 ? item.desc.slice(0, 20) + '...' : item.desc}}</view>
+          </card>
+        </view>
+      </t-tab-panel>
+    </t-tabs>
+  </view>
+</view>
+
+<!-- 发布按钮和管理员操作区 -->
+<view class="home-release">
+  <!-- 发布内容按钮 -->
+  <t-button theme="primary" size="large" icon="add" shape="round" bindtap="goRelease">
+    发布
+  </t-button>
+  <!-- 管理员专属：初始化测试数据按钮 -->
+  <t-button 
+    wx:if="{{isAdmin}}"
+    theme="light" 
+    size="medium" 
+    icon="refresh" 
+    bindtap="initTestData" 
+    style="margin-top: 10px;"
+  >
+    初始化测试数据
+  </t-button>
+  <!-- 管理员专属：初始化轮播图按钮（已隐藏） -->
+  <!--
+  <t-button 
+    wx:if="{{isAdmin}}"
+    theme="light" 
+    size="medium" 
+    icon="refresh" 
+    bindtap="initSwipers" 
+    style="margin-top: 10px;"
+  >
+    初始化轮播图
+  </t-button>
+  -->
+</view>
+<!-- 全局消息提示组件 -->
+<t-message id="t-message" />

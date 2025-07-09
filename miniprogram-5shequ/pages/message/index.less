@@ -1,0 +1,43 @@
+/*
+ * @file pages/message/index.less
+ * @description 消息列表页面样式，包含主容器、导航栏、消息列表、头像、内容等样式
+ * @author 自动注释
+ * @since 2024-06-01
+ */
+/* pages/message/message.wxss */
+page {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  height: 100vh;
+  padding-bottom: calc(env(safe-area-inset-bottom) + 112rpx);
+}
+
+/* 顶部导航栏样式 */
+.nav-bar {
+  border-bottom: 1rpx solid #e7e7e7;
+}
+
+/* 消息列表滚动区样式 */
+.message-list {
+  height: 0;
+  flex-grow: 1;
+}
+
+/* 头像圆形样式 */
+.avatar {
+  border-radius: 50% !important;
+}
+
+/* 消息内容摘要样式 */
+.content > view {
+  width: 560rpx;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 未读消息内容样式（加宽） */
+.content.unread > view {
+  width: 510rpx;
+}

@@ -1,0 +1,5 @@
+<!-- 性能监控组件 -->
+<!-- 这是一个无UI的组件，仅用于监控性能 -->
+<view class="performance-monitor" style="display: none;">
+  <!-- 组件内容为空，仅用于触发组件生命周期 -->
+</view> 

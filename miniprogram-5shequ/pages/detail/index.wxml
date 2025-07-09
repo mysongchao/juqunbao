@@ -1,0 +1,106 @@
+<view wx:if="{{loading}}">加载中...</view>
+<view wx:else>
+  <view class="detail-container">
+    <!-- 头部：头像、昵称、关注 -->
+    <view class="detail-header">
+      <image class="avatar" src="{{detail.author.avatar}}" />
+      <text class="nickname">{{detail.author.nickname}}</text>
+      <button class="follow-btn" bindtap="onFollowTap">{{detail.author.isFollowed ? '已关注' : '关注'}}</button>
+    </view>
+    <!-- 图片区：剧中，宽度70% -->
+    <swiper class="detail-images" indicator-dots>
+      <swiper-item wx:for="{{detail.images}}" wx:key="*this">
+        <image class="main-image" src="{{item}}" mode="aspectFill" />
+      </swiper-item>
+    </swiper>
+    <!-- 描述内容，往下移 -->
+    <view class="detail-desc">{{detail.desc}}</view>
+    <!-- 标签区 -->
+    <view class="detail-tags">
+      <t-tag wx:for="{{detail.tags}}" wx:key="index">{{item}}</t-tag>
+    </view>
+    <!-- 互动区 -->
+    <view class="detail-actions">
+      <button bindtap="onLikeTap">{{detail.isLiked ? '已赞' : '点赞'}} {{detail.likeCount}}</button>
+      <button bindtap="onFavoriteTap">{{detail.isFavorited ? '已收藏' : '收藏'}} {{detail.favoriteCount}}</button>
+      <button bindtap="onCommentTap">评论 {{detail.commentCount}}</button>
+      <text>浏览 {{detail.viewCount}}</text>
+    </view>
+    <!-- 评论输入框 -->
+    <form bindsubmit="onSendComment" class="comment-form">
+      <input name="comment" placeholder="{{replyTo ? '回复 ' + replyToUserName : '说点什么...'}}"
+             value="{{commentInput}}" bindinput="onCommentInput" focus="{{replyTo ? true : false}}" />
+      <button formType="submit">发送</button>
+    </form>
+    <!-- 热评置顶区 -->
+    <view wx:if="{{hotComments.length}}" class="hot-comments">
+      <view class="hot-title">热评</view>
+      <block wx:for="{{hotComments}}" wx:key="_id">
+        <view class="comment-item hot">
+          <text class="author">{{item.userName}}</text>
+          <text wx:if="{{item.isAuthor}}" class="tag-author">楼主</text>
+          <text wx:if="{{item.isAdmin}}" class="tag-admin">管理员</text>
+          <text class="content">{{item.content}}</text>
+          <text wx:if="{{item.replyToUserName}}" class="reply-to">@{{item.replyToUserName}}</text>
+          <view class="actions">
+            <text class="like" bindtap="onLikeComment" data-comment-id="{{item._id}}">👍{{item.likeCount}}</text>
+            <text class="reply" bindtap="onReplyComment" data-comment-id="{{item._id}}" data-user-name="{{item.userName}}">回复</text>
+            <text wx:if="{{item.canDelete}}" class="delete" bindtap="onDeleteComment" data-comment-id="{{item._id}}">删除</text>
+          </view>
+          <!-- 楼中楼 -->
+          <block wx:for="{{item.replies}}" wx:key="_id">
+            <view class="reply-item">
+              <text class="author">{{item.userName}}</text>
+              <text wx:if="{{item.isAuthor}}" class="tag-author">楼主</text>
+              <text wx:if="{{item.isAdmin}}" class="tag-admin">管理员</text>
+              <text class="content">{{item.content}}</text>
+              <text wx:if="{{item.replyToUserName}}" class="reply-to">@{{item.replyToUserName}}</text>
+              <view class="actions">
+                <text class="like" bindtap="onLikeComment" data-comment-id="{{item._id}}">👍{{item.likeCount}}</text>
+                <text class="reply" bindtap="onReplyComment" data-comment-id="{{item._id}}" data-user-name="{{item.userName}}">回复</text>
+                <text wx:if="{{item.canDelete}}" class="delete" bindtap="onDeleteComment" data-comment-id="{{item._id}}">删除</text>
+              </view>
+            </view>
+          </block>
+        </view>
+      </block>
+    </view>
+    <!-- 普通评论区 -->
+    <view wx:if="{{comments.length}}" class="comments">
+      <block wx:for="{{comments}}" wx:key="_id">
+        <view class="comment-item">
+          <text class="author">{{item.userName}}</text>
+          <text wx:if="{{item.isAuthor}}" class="tag-author">楼主</text>
+          <text wx:if="{{item.isAdmin}}" class="tag-admin">管理员</text>
+          <text class="content">{{item.content}}</text>
+          <text wx:if="{{item.replyToUserName}}" class="reply-to">@{{item.replyToUserName}}</text>
+          <view class="actions">
+            <text class="like" bindtap="onLikeComment" data-comment-id="{{item._id}}">👍{{item.likeCount}}</text>
+            <text class="reply" bindtap="onReplyComment" data-comment-id="{{item._id}}" data-user-name="{{item.userName}}">回复</text>
+            <text wx:if="{{item.canDelete}}" class="delete" bindtap="onDeleteComment" data-comment-id="{{item._id}}">删除</text>
+          </view>
+          <!-- 楼中楼 -->
+          <block wx:for="{{item.replies}}" wx:key="_id">
+            <view class="reply-item">
+              <text class="author">{{item.userName}}</text>
+              <text wx:if="{{item.isAuthor}}" class="tag-author">楼主</text>
+              <text wx:if="{{item.isAdmin}}" class="tag-admin">管理员</text>
+              <text class="content">{{item.content}}</text>
+              <text wx:if="{{item.replyToUserName}}" class="reply-to">@{{item.replyToUserName}}</text>
+              <view class="actions">
+                <text class="like" bindtap="onLikeComment" data-comment-id="{{item._id}}">👍{{item.likeCount}}</text>
+                <text class="reply" bindtap="onReplyComment" data-comment-id="{{item._id}}" data-user-name="{{item.userName}}">回复</text>
+                <text wx:if="{{item.canDelete}}" class="delete" bindtap="onDeleteComment" data-comment-id="{{item._id}}">删除</text>
+              </view>
+            </view>
+          </block>
+        </view>
+      </block>
+    </view>
+    <!-- 空态提示保留 -->
+    <view wx:if="{{comments.length === 0 && !loadingComments}}" class="comment-empty">
+      快来抢沙发吧~
+    </view>
+    <!-- 评论区、相关推荐后续补充 -->
+  </view>
+</view> 

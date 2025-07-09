@@ -1,0 +1,76 @@
+/*
+ * @file pages/release/index.less
+ * @description 发布页面样式，包含主容器、上传区、描述区、标签区、定位区、按钮区等样式
+ * @author 自动注释
+ * @since 2024-06-01
+ */
+.release-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0;
+  box-sizing: border-box;
+
+  /* 通用盒子样式 */
+  .box {
+    width: 100%;
+  }
+  /* 图片上传区样式 */
+  .upload {
+    height: 112rpx * 2;
+    position: relative;
+    &-class {
+      width: 344rpx * 2;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+  /* 描述输入区样式 */
+  .desc {
+    height: 132rpx * 2;
+    display: flex;
+    padding: 32rpx;
+    align-items: flex-start;
+    justify-content: space-between;
+    box-sizing: border-box;
+    .desc-class {
+      width: 246rpx * 2;
+      height: 100%;
+      padding: 0;
+    }
+  }
+  /* 标签选择区样式 */
+  .taggroup {
+    .cell-title-class {
+      width: 81rpx * 2;
+    }
+    .cell-note-class {
+      overflow-x: auto;
+      justify-content: start;
+    }
+    .tag-class {
+      margin-left: 24rpx;
+    }
+  }
+  /* 选中标签高亮样式 */
+  .tag-class-checked {
+    background: #e6f7ff !important;
+    border-color: #1890ff !important;
+    color: #1890ff !important;
+  }
+  /* 操作按钮区样式 */
+  .btngroup {
+    display: flex;
+    justify-content: space-evenly;
+    padding: 32rpx;
+    position: fixed;
+    bottom: 64rpx;
+    .btn-class {
+      width: 163.5rpx * 2;
+      margin: 0;
+    }
+  }
+}

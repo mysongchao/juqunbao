@@ -1,0 +1,30 @@
+<!-- WXS 工具模块，用于消息已读判断和未读数统计 -->
+<wxs src="./index.wxs" module="utils" />
+
+<!-- 顶部导航栏 -->
+<nav nav-type="title" title-text="全部消息"></nav>
+<!-- 消息列表滚动区 -->
+<scroll-view
+  class="message-list"
+  scroll-y
+  refresher-enabled
+  refresher-triggered="{{ loading }}"
+  bindrefresherrefresh="getMessageList"
+>
+  <!-- 消息用户列表，循环渲染每个用户的消息摘要 -->
+  <t-cell
+    wx:for="{{ messageList }}"
+    wx:key="index"
+    t-class-image="avatar"
+    t-class-description="content {{ utils.isRead(item.messages) ? '' : 'unread' }}"
+    image="{{ item.avatar }}"
+    title="{{ item.name }}"
+    description="{{ item.messages[item.messages.length - 1].content }}"
+    hover
+    bind:tap="toChat"
+    data-user-id="{{ item.userId }}"
+  >
+    <!-- 未读消息数徽标 -->
+    <t-badge slot="right-icon" count="{{ utils.computeUnreadNum(item.messages) }}" class="wrapper" />
+  </t-cell>
+</scroll-view>

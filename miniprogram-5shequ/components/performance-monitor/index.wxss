@@ -1,0 +1,8 @@
+/* 性能监控组件样式 */
+.performance-monitor {
+  /* 隐藏组件，仅用于监控 */
+  display: none !important;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+} 

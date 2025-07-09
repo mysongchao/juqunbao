@@ -1,0 +1,9 @@
+<view class="home-card">
+  <t-image t-class="home-card__image" src="{{url}}" mode="aspectFill" />
+  <view class="home-card__info">
+    <rich-text class="home-card__desc" nodes="{{desc}}"></rich-text>
+    <view class="home-card__tag-group">
+      <t-tag wx:for="{{tags}}" wx:key="index" size="small" variant="light" theme="{{item.theme}}">{{item.text}}</t-tag>
+    </view>
+  </view>
+</view>
