@@ -3,15 +3,15 @@ const bodyParser = require('body-parser');
 const path = require('path');
 
 // 导入云函数模块
-const homeModule = require('./home/index.js');
-const userModule = require('./user/index.js');
-const contentModule = require('./content/index.js');
-const searchModule = require('./search/index.js');
-const uploadModule = require('./upload/index.js');
-const messageModule = require('./message/index.js');
-const tagsModule = require('./tags/index.js');
-const contentActionsModule = require('./contentActions/index.js');
-const getContentDetailModule = require('./getContentDetail/index.js');
+const homeModule = require('./cloudfunctions/home/index.js');
+const userModule = require('./cloudfunctions/user/index.js');
+const contentModule = require('./cloudfunctions/content/index.js');
+const searchModule = require('./cloudfunctions/search/index.js');
+const uploadModule = require('./cloudfunctions/upload/index.js');
+const messageModule = require('./cloudfunctions/message/index.js');
+const tagsModule = require('./cloudfunctions/tags/index.js');
+const contentActionsModule = require('./cloudfunctions/contentActions/index.js');
+const getContentDetailModule = require('./cloudfunctions/getContentDetail/index.js');
 
 const app = express();
 const PORT = process.env.PORT || 3000;

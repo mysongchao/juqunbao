@@ -12,7 +12,7 @@ RUN npm config set registry https://registry.npmmirror.com/
 RUN npm config set cache /tmp/npm-cache
 
 # 复制 package.json 和 package-lock.json
-COPY cloudfunctions/package*.json ./
+COPY package*.json ./
 
 # 安装依赖
 RUN npm install --production --no-optional --prefer-offline
@@ -26,8 +26,8 @@ WORKDIR /app
 # 从构建阶段复制 node_modules
 COPY --from=builder /app/node_modules ./node_modules
 
-# 复制云函数代码
-COPY cloudfunctions/ ./
+# 复制应用代码
+COPY . ./
 
 # 创建非 root 用户
 RUN addgroup -g 1001 -S nodejs && \

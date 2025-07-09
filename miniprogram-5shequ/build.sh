@@ -28,7 +28,7 @@ if [ $? -eq 0 ]; then
     
     # 等待服务启动
     echo "等待服务启动..."
-    sleep 5
+    sleep 10
     
     # 测试健康检查
     echo "测试健康检查..."
@@ -38,8 +38,11 @@ if [ $? -eq 0 ]; then
         echo "✅ 服务启动成功!"
         echo "API 地址: http://localhost:3000"
         echo "健康检查: http://localhost:3000/health"
+        echo "根路径: http://localhost:3000/"
     else
         echo "❌ 服务启动失败"
+        echo "查看容器日志..."
+        docker logs test-container
     fi
     
     # 停止测试容器

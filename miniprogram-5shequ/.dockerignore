@@ -180,8 +180,6 @@ behaviors/
 custom-tab-bar/
 docs/
 *.md
-*.json
-*.js
 *.less
 *.wxss
 *.wxml
@@ -189,7 +187,9 @@ app.*
 project.config.json
 sitemap.json
 
-# 只保留 cloudfunctions 目录
+# 保留必要的文件
+!package.json
+!server.js
 !cloudfunctions/
 !Dockerfile
 !.dockerignore 
