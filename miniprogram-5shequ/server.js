@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 const path = require('path');
 
 // 导入云函数模块
@@ -17,6 +18,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 // 中间件
+app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 

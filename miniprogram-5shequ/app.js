@@ -7,6 +7,7 @@ import { setupGlobalErrorHandler, showError } from './utils/errorHandler';
 import { logger, performanceLogger } from './utils/logger';
 import { networkUtils, offlineManager } from './utils/network';
 import { cacheManager } from './utils/cache';
+import { clearTempFiles, getStorageInfo } from './utils/util';
 
 // 初始化Mock数据（仅在开发环境）
 if (config.isMock) {
@@ -36,6 +37,9 @@ App({
     
     // 初始化缓存系统
     this.initCacheSystem();
+    
+    // 清理临时文件
+    this.cleanupTempFiles();
     
     // 设置全局错误处理
     setupGlobalErrorHandler();
@@ -215,6 +219,33 @@ App({
       logger.info('🧹 内存清理完成', {}, 'App');
     } catch (error) {
       logger.error('内存清理失败', error, 'App');
+    }
+  },
+
+  // 清理临时文件
+  cleanupTempFiles() {
+    try {
+      // 获取存储信息
+      const storageInfo = getStorageInfo();
+      if (storageInfo) {
+        logger.info('📊 存储空间使用情况', storageInfo, 'Storage');
+        console.log('📊 存储空间使用情况:', storageInfo);
+        
+        // 如果存储空间使用率超过80%，清理临时文件
+        if (storageInfo.currentSize > storageInfo.limitSize * 0.8) {
+          logger.warn('⚠️ 存储空间不足，开始清理临时文件', storageInfo, 'Storage');
+          console.log('⚠️ 存储空间不足，开始清理临时文件');
+          clearTempFiles();
+        }
+      }
+      
+      // 定期清理临时文件（每次启动时）
+      clearTempFiles();
+      
+      logger.info('🧹 临时文件清理完成', {}, 'Storage');
+      console.log('🧹 临时文件清理完成');
+    } catch (error) {
+      logger.error('临时文件清理失败', error, 'Storage');
     }
   },
 

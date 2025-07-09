@@ -1,33 +1,24 @@
-# 简化版 Dockerfile - 用于解决构建超时问题
-FROM node:16-alpine
+# 使用官方 Node.js 镜像
+FROM node:18-alpine
 
 # 设置工作目录
 WORKDIR /app
 
-# 使用国内镜像源
-RUN npm config set registry https://registry.npmmirror.com/
+# 复制 package.json 和 package-lock.json
+COPY package*.json ./
 
-# 复制 package.json
-COPY cloudfunctions/package.json ./
+# 安装依赖
+RUN npm install --production
 
-# 安装依赖（最小化安装）
-RUN npm install --production --no-optional --no-audit --no-fund
-
-# 复制代码
-COPY cloudfunctions/ ./
-
-# 创建用户
-RUN adduser -D -s /bin/sh nodejs && \
-    chown -R nodejs:nodejs /app
-
-USER nodejs
+# 复制应用代码
+COPY . .
 
 # 暴露端口
 EXPOSE 3000
 
-# 环境变量
-ENV NODE_ENV=production
-ENV PORT=3000
+# 健康检查
+HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
+  CMD curl -f http://localhost:3000/health || exit 1
 
-# 启动命令
-CMD ["node", "server.js"] 
+# 启动应用
+CMD ["npm", "start"] 
