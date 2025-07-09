@@ -24,7 +24,7 @@ if [ $? -eq 0 ]; then
     
     echo ""
     echo "运行测试容器..."
-    docker run -d --name test-container -p 8080:8080 ${IMAGE_NAME}:${TAG}
+    docker run -d --name test-container -p 3000:3000 ${IMAGE_NAME}:${TAG}
     
     # 等待服务启动
     echo "等待服务启动..."
@@ -32,12 +32,12 @@ if [ $? -eq 0 ]; then
     
     # 测试健康检查
     echo "测试健康检查..."
-    curl -f http://localhost:8080/health
+    curl -f http://localhost:3000/health
     
     if [ $? -eq 0 ]; then
         echo "✅ 服务启动成功!"
-        echo "API 地址: http://localhost:8080"
-        echo "健康检查: http://localhost:8080/health"
+        echo "API 地址: http://localhost:3000"
+        echo "健康检查: http://localhost:3000/health"
     else
         echo "❌ 服务启动失败"
     fi

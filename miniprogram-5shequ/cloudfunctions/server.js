@@ -14,7 +14,7 @@ const contentActionsModule = require('./contentActions/index.js');
 const getContentDetailModule = require('./getContentDetail/index.js');
 
 const app = express();
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 3000;
 
 // 中间件
 app.use(bodyParser.json());
@@ -22,6 +22,20 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // 健康检查端点
 app.get('/health', (req, res) => {
+  res.status(200).json({ status: 'OK', timestamp: new Date().toISOString() });
+});
+
+// 腾讯云云托管健康检查端点
+app.get('/', (req, res) => {
+  res.status(200).json({ 
+    status: 'OK', 
+    message: 'WeChat Miniprogram Cloud Functions API',
+    timestamp: new Date().toISOString() 
+  });
+});
+
+// 腾讯云云托管特定的健康检查路径
+app.get('/_/health', (req, res) => {
   res.status(200).json({ status: 'OK', timestamp: new Date().toISOString() });
 });
 
