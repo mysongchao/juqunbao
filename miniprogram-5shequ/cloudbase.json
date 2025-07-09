@@ -1,0 +1,22 @@
+{
+  "version": "2.0",
+  "envId": "cloud1-6gjcqmld5d653514",
+  "framework": {
+    "name": "nodejs",
+    "plugins": {
+      "client": {
+        "use": "@cloudbase/framework-plugin-node",
+        "inputs": {
+          "entry": "server.js",
+          "path": "/",
+          "name": "miniprogram-api",
+          "installCommand": "npm install",
+          "buildCommand": "npm run build",
+          "startCommand": "npm start",
+          "port": 3000,
+          "dockerfilePath": "./Dockerfile"
+        }
+      }
+    }
+  }
+} 

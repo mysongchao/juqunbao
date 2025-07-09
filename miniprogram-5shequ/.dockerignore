@@ -190,6 +190,9 @@ sitemap.json
 # 保留必要的文件
 !package.json
 !server.js
+!start.sh
 !cloudfunctions/
 !Dockerfile
-!.dockerignore 
+!.dockerignore
+!cloudbase.json
+!.node-version 

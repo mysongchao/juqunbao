@@ -1,0 +1,36 @@
+# 腾讯云云托管忽略文件
+# 排除不需要的文件和目录
+
+# 小程序相关文件
+pages/
+components/
+static/
+mock/
+utils/
+behaviors/
+custom-tab-bar/
+docs/
+
+# 开发工具文件
+*.md
+*.less
+*.wxss
+*.wxml
+app.*
+project.config.json
+sitemap.json
+
+# 开发依赖
+node_modules/
+.git/
+.gitignore
+
+# 保留必要的文件
+!package.json
+!server.js
+!start.sh
+!cloudfunctions/
+!Dockerfile
+!.dockerignore
+!cloudbase.json
+!.node-version 
